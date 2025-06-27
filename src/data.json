@@ -1,0 +1,75 @@
+[
+    {
+      "shopId": 1,
+      "title": "제나키친",
+      "review": "5.0/5.0",
+      "distance": "292m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "여유"
+    },
+    {
+      "shopId": 2,
+      "title": "스시쇼",
+      "review": "4.7/5.0",
+      "distance": "304m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "보통"
+    },
+    {
+      "shopId": 3,
+      "title": "오매떡 월곡점",
+      "review": "4.9/5.0",
+      "distance": "618m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "혼잡"
+    },
+    {
+      "shopId": 4,
+      "title": "송송식탁",
+      "review": "4.7/5.0",
+      "distance": "292m",
+      "minute": "도보N분",
+     "population" : "4/20명",
+     "congestion" : "여유"
+    },
+    {
+      "shopId": 5,
+      "title": "맘스터치 동덕여대점",
+      "review": "4.7/5.0",
+      "distance": "292m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "여유"
+    },
+    {
+      "shopId": 6,
+      "title": "써브웨이 동덕여대점",
+      "review": "4.7/5.0",
+      "distance": "292m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "여유"
+    },  
+    {
+      "shopId": 7,
+      "title": "춘리마라탕 월곡역점",
+      "review": "4.7/5.0",
+      "distance": "292m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "여유"
+    },
+    {
+      "shopId": 8,
+      "title": "동대문엽기떡볶이 동덕여대점",
+      "review": "4.7/5.0",
+      "distance": "292m",
+      "minute": "도보N분",
+      "population" : "4/20명",
+      "congestion" : "여유"
+    }
+  ]
+  
