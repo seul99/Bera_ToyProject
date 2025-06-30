@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as P from "../styles/styledPhoneNumber";
+import * as P from "../styled/styledPhoneNumber";
 
 const PhoneNumber = () => {
   const navigate = useNavigate();

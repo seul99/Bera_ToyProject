@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as I from "../styles/styledId";
+import * as I from "../styled/styledId";
 
 const Id = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Id = () => {
           />{" "}
         </I.BackBtn>
         <I.InputIdText>아이디를 입력해 주세요</I.InputIdText>
-        <I.IdText> 아이디디 </I.IdText>
+        <I.IdText> 아이디 </I.IdText>
         <I.InputId type="text" />
         <I.Caution>*숫자, 영문 조합 8자 이상</I.Caution>
         <I.ContinueBtn onClick={goPW}> 계속하기 </I.ContinueBtn>

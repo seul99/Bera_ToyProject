@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as W from "../styles/styledName";
+import * as W from "../styled/styledName";
 
 const Name = () => {
   const navigate = useNavigate();

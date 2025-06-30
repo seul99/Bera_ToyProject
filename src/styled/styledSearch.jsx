@@ -272,6 +272,8 @@ export const ShopName = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  display:flex;
+
 `;
 
 export const ReviewText = styled.div`
@@ -281,6 +283,7 @@ export const ReviewText = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  display:flex;
 `;
 export const DistanceText = styled.div`
   display: flex; // 가로 정렬!
@@ -300,6 +303,7 @@ export const Minute = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-left: 3px;
 `;
 
 export const BottomBar = styled.div`

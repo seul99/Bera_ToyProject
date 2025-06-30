@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as P from "../styles/styledPassword";
+import * as P from "../styled/styledPassword";
 
 const Password = () => {
   const navigate = useNavigate();

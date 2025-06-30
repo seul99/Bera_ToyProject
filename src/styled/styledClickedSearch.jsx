@@ -178,9 +178,20 @@ export const CongestionBar = styled.div`
   height: 60px;
   flex-shrink: 0;
   border-radius: 15px;
-  background: #e8fcd9;
   display: flex;
   align-items: center; // 세로 중앙
+
+  &.green{
+    background: #e8fcd9;
+  }
+
+  &.yellow{
+    background: #FFF9C9;
+  }
+
+  &.red{
+    background: #FFE2E2;
+  }
 `;
 
 export const CongestionImg = styled.div`
@@ -209,8 +220,18 @@ export const Congestion = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 22px;
-  color: #4dc794;
   font-weight: 600;
+    &.green{
+    color: #4DC794;
+  }
+
+  &.yellow{
+    color: #FFA62A;
+  }
+
+  &.red{
+    color: #FF572A;
+  }
 `;
 export const Population = styled.div`
   position: relative;

@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as CS from "../styles/styledClickedSearch";
+import * as CS from "../styled/styledClickedSearch";
 import NavigationBar from "../component/NavigationBar";
 
+function BarColor(congestion) {
+  if (congestion === "여유")
+    return "green"
+  else if (congestion === "보통")
+    return "yellow"
+  else if (congestion === "혼잡")
+    return "red"
+}
 const ClickedSearch = ({ dataList }) => {
   // 즐겨찾기 버튼
   const [isLiked, setIsLiked] = useState(false);
@@ -72,7 +80,8 @@ const ClickedSearch = ({ dataList }) => {
         </CS.InformWrapper>
 
         <CS.TitleText className="congestion">현재 혼잡도</CS.TitleText>
-        <CS.CongestionBar>
+        <CS.CongestionBar className={BarColor(Shop.congestion)}>
+
           <CS.CongestionImg>
             {Shop.congestion === "여유" ? (
               <img
@@ -95,7 +104,7 @@ const ClickedSearch = ({ dataList }) => {
             )}
           </CS.CongestionImg>
           <CS.CongestionInform>혼잡도</CS.CongestionInform>
-          <CS.Congestion>{Shop.congestion}</CS.Congestion>
+          <CS.Congestion className={BarColor(Shop.congestion)}>{Shop.congestion}</CS.Congestion>
           <CS.Population>{Shop.population}</CS.Population>
         </CS.CongestionBar>
 

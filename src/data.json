@@ -42,7 +42,7 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "여유"
+    "congestion": "혼잡"
   },
   {
     "shopId": 6,
@@ -51,7 +51,7 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "여유"
+    "congestion": "보통"
   },
   {
     "shopId": 7,
@@ -60,7 +60,7 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "여유"
+    "congestion": "혼잡잡"
   },
   {
     "shopId": 8,

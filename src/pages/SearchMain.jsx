@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "../styles/styledSearch";
+import * as S from "../styled/styledSearch";
 import NavigationBar from "../component/NavigationBar";
 
 const Search = ({ dataList }) => {
@@ -191,8 +191,8 @@ const Search = ({ dataList }) => {
                     e.congestion === "여유"
                       ? "/images/statusStar/greensom.svg"
                       : e.congestion === "보통"
-                      ? "/images/statusStar/yellowsom.svg"
-                      : "/images/statusStar/redsom.svg"
+                        ? "/images/statusStar/yellowsom.svg"
+                        : "/images/statusStar/redsom.svg"
                   }
                   alt="CongestionImg"
                   width="42px"

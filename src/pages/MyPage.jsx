@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as M from "../styles/styledMyPage";
+import * as M from "../styled/styledMyPage";
 import NavigationBar from "../component/NavigationBar";
 
 const MyPage = () => {
