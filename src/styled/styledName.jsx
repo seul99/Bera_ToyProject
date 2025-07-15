@@ -80,7 +80,7 @@ export const ContinueBtn = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 16px;
-  background: #70b9be;
+  background: ${(props) => (props.active ? "#70b9be" : "#D9D9D9")};
   border: none;
   color: #fff;
   text-align: center;
@@ -88,7 +88,9 @@ export const ContinueBtn = styled.button`
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
+  line-height: 135%; /* 21.6px */
   white-space: nowrap;
+
   &:hover {
     opacity: 80%;
   }

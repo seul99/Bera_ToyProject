@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as I from "../styled/styledId";
 
 const Id = () => {
   const navigate = useNavigate();
+
+  const [id, setId] = useState("");
   const goPW = () => {
-    navigate(`/Password`);
+    if (id.length >= 8) {
+
+      navigate(`/Password`);
+    }
   };
 
   const goBack = () => {
     navigate(`/Start`);
   };
+
 
   return (
     <I.Container>
@@ -27,9 +33,11 @@ const Id = () => {
         </I.TopBox>
         <I.InputIdText>아이디를 입력해 주세요</I.InputIdText>
         <I.IdText> 아이디 </I.IdText>
-        <I.InputId type="text" />
+        <I.InputId type="text" value={id} onChange={(e) => setId(e.target.value)}
+        />
         <I.Caution>*숫자, 영문 조합 8자 이상</I.Caution>
-        <I.ContinueBtn onClick={goPW}> 계속하기 </I.ContinueBtn>
+        <I.ContinueBtn onClick={goPW} active={id.length >= 8}
+        > 계속하기 </I.ContinueBtn>
       </I.Box>
     </I.Container>
   );

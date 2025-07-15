@@ -5,10 +5,13 @@ import * as P from "../styled/styledPhoneNumber";
 const PhoneNumber = () => {
   const navigate = useNavigate();
 
-  const [inputValue, setInputValue] = useState("");
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const goMain = () => {
+    if (phoneNumber.length === 11) {
+      navigate(`/Main`);
+    }
   };
+
   const goBack = () => {
     navigate(`/Name`);
   };
@@ -23,15 +26,12 @@ const PhoneNumber = () => {
               width="12px"
             />
           </P.BackBtn>
-
           <P.JoinText>회원가입</P.JoinText>
         </P.TopBox>
         <P.InputPnText>전화번호를 입력해 주세요</P.InputPnText>
         <P.PnText> 전화번호 </P.PnText>
-        <P.InputPn type="text" value={inputValue} onChange={handleChange} />
-        <P.ContinueBtn onClick={() => navigate("/signupSuccess")}>
-          {inputValue ? "회원가입 완료" : "계속하기"}
-        </P.ContinueBtn>
+        <P.InputPn type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+        <P.ContinueBtn onClick={goMain} active={phoneNumber.length === 11}> 회원가입 완료 </P.ContinueBtn>
       </P.Box>
     </P.Container>
   );

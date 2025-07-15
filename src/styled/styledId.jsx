@@ -44,7 +44,6 @@ export const InputIdText = styled.div`
   line-height: normal;
 `;
 export const IdText = styled.div`
-
   color: #70B9BE;
   font-family: Roboto;
   font-size: 14px;
@@ -61,7 +60,7 @@ export const InputId = styled.input`
   width: 331px;
   height: 35px;
   flex-shrink: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 `;
 export const Caution = styled.div`
@@ -82,7 +81,7 @@ export const ContinueBtn = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 16px;
-  background: #70b9be;
+  background: ${(props) => (props.active ? "#70b9be" : "#D9D9D9")};
   border: none;
   color: #fff;
   text-align: center;
@@ -92,6 +91,7 @@ export const ContinueBtn = styled.button`
   font-weight: 700;
   line-height: 135%; /* 21.6px */
   white-space: nowrap;
+
   &:hover {
     opacity: 80%;
   }

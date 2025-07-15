@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as W from "../styled/styledName";
 
 const Name = () => {
   const navigate = useNavigate();
+
+  const [name, setName] = useState("");
   const goPN = () => {
-    navigate(`/PhoneNumber`);
+    if (name !== '') {
+      navigate(`/PhoneNumber`);
+    }
   };
+
   const goBack = () => {
     navigate(`/Password`);
   };
@@ -25,8 +30,8 @@ const Name = () => {
         </W.TopBox>
         <W.InputIdText>이름을 입력해 주세요</W.InputIdText>
         <W.IdText> 이름 </W.IdText>
-        <W.InputId type="text" />
-        <W.ContinueBtn onClick={goPN}> 계속하기 </W.ContinueBtn>
+        <W.InputId type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <W.ContinueBtn onClick={goPN} active={name !== ''}> 계속하기 </W.ContinueBtn>
       </W.Box>
     </W.Container>
   );

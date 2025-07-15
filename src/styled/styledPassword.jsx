@@ -20,6 +20,7 @@ export const Box = styled.div`
 export const TopBox = styled.div`
   display:flex;
 `;
+
 export const JoinText = styled.div`
   color: #006d77;
   font-family: Roboto;
@@ -102,7 +103,7 @@ export const ContinueBtn = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 16px;
-  background: #70b9be;
+  background: ${(props) => (props.active ? "#70b9be" : "#D9D9D9")};
   border: none;
   color: #fff;
   text-align: center;
@@ -112,6 +113,7 @@ export const ContinueBtn = styled.button`
   font-weight: 700;
   line-height: 135%; /* 21.6px */
   white-space: nowrap;
+
   &:hover {
     opacity: 80%;
   }

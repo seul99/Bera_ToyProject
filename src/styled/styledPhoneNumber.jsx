@@ -71,26 +71,27 @@ export const InputPn = styled.input`
 `;
 
 export const ContinueBtn = styled.button`
-  align-items: center;
-  display: flex;
-  width: 331px;
-  height: 54px;
-  padding: 16px 146px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 16px;
-  background: #70b9be;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 135%; /* 21.6px */
-  white-space: nowrap;
-  &:hover {
-    opacity: 80%;
-  }
+align-items: center;
+display: flex;
+width: 331px;
+height: 54px;
+padding: 16px 146px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 16px;
+background: ${(props) => (props.active ? "#70b9be" : "#D9D9D9")};
+border: none;
+color: #fff;
+text-align: center;
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 135%; /* 21.6px */
+white-space: nowrap;
+
+&:hover {
+  opacity: 80%;
+}
 `;
