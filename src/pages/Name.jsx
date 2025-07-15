@@ -13,14 +13,16 @@ const Name = () => {
   return (
     <W.Container>
       <W.Box>
-        <W.JoinText>회원가입</W.JoinText>
-        <W.BackBtn onClick={goBack}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/backBtn.svg`}
-            alt="back"
-            width="12px"
-          />{" "}
-        </W.BackBtn>
+        <W.TopBox>
+          <W.BackBtn onClick={goBack}>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/backBtn.svg`}
+              alt="back"
+              width="12px"
+            />{" "}
+          </W.BackBtn>
+          <W.JoinText>회원가입</W.JoinText>
+        </W.TopBox>
         <W.InputIdText>이름을 입력해 주세요</W.InputIdText>
         <W.IdText> 이름 </W.IdText>
         <W.InputId type="text" />

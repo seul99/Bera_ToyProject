@@ -15,14 +15,17 @@ const PhoneNumber = () => {
   return (
     <P.Container>
       <P.Box>
-        <P.JoinText>회원가입</P.JoinText>
-        <P.BackBtn onClick={goBack}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/backBtn.svg`}
-            alt="back"
-            width="12px"
-          />
-        </P.BackBtn>
+        <P.TopBox>
+          <P.BackBtn onClick={goBack}>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/backBtn.svg`}
+              alt="back"
+              width="12px"
+            />
+          </P.BackBtn>
+
+          <P.JoinText>회원가입</P.JoinText>
+        </P.TopBox>
         <P.InputPnText>전화번호를 입력해 주세요</P.InputPnText>
         <P.PnText> 전화번호 </P.PnText>
         <P.InputPn type="text" value={inputValue} onChange={handleChange} />

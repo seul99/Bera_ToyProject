@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../styled/styledSearch";
 import NavigationBar from "../component/NavigationBar";
 
-const Search = ({ dataList }) => {
+const SearchMain = ({ dataList }) => {
   const [isActive, setIsActive] = useState(false);
   const on_Click = () => {
     setIsActive((prev) => !prev);
   };
+
   const navigate = useNavigate();
   const goBack = () => {
     navigate(`/main`);
@@ -25,10 +26,31 @@ const Search = ({ dataList }) => {
     setIsModalOpen(false);
   };
 
+  //검색 기능
+  const [search, setSearch] = useState("");
+  const onChange = (e) => {
+    setSearch(e.target.value)
+  }
+
+
+  //카테고리 필터링
+  const [selectedCategory, setSelectedCategory] = useState("전체");
+  const filteredData = dataList.filter((item) => {
+    const matchTitle = item.title.toLowerCase().includes(search.toLowerCase());
+    const matchCategory =
+      selectedCategory === "전체" || item.category === selectedCategory;
+    return matchTitle && matchCategory;
+  });
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+
   return (
     <S.Container>
       <S.Box>
-        <S.SearchBox />
+        <S.SearchBox value={search} onChange={onChange} />
         <S.BackBtn onClick={goBack}>
           <img
             src={`${process.env.PUBLIC_URL}/images/SearchBackBtn.svg`}
@@ -45,68 +67,91 @@ const Search = ({ dataList }) => {
           />
         </S.LocationImg>
         <S.LocationText>성북구 하월곡동</S.LocationText>
+        <S.TopBox>
+          <S.IconBox onClick={() => handleCategoryClick("전체")}
+            className={selectedCategory === "전체" ? "active" : ""}
+          >
+            <S.TopIcon className="Home">
+              {" "}
+              <img
+                src={`${process.env.PUBLIC_URL}/images/House.svg`}
+                alt="Home"
+                width="40px"
+              />
+            </S.TopIcon>
+            <S.TopIconText className="HomeTxt"> 홈 </S.TopIconText>
+          </S.IconBox>
 
-        <S.TopIcon className="Home">
-          {" "}
-          <img
-            src={`${process.env.PUBLIC_URL}/images/House.svg`}
-            alt="Home"
-            width="40px"
-          />
-        </S.TopIcon>
-        <S.TopIconText className="HomeTxt"> 홈 </S.TopIconText>
+          <S.IconBox onClick={() => handleCategoryClick("한식")}
+            className={selectedCategory === "한식" ? "active" : ""}
+          >
+            <S.TopIcon className="Kfood">
+              {" "}
+              <img
+                src={`${process.env.PUBLIC_URL}/images/KFood.svg`}
+                alt="Kfood"
+                width="40px"
+              />
+            </S.TopIcon>
+            <S.TopIconText className="KFoodTxt"> 한식 </S.TopIconText>
+          </S.IconBox>
 
-        <S.TopIcon className="Kfood">
-          {" "}
-          <img
-            src={`${process.env.PUBLIC_URL}/images/KFood.svg`}
-            alt="Kfood"
-            width="40px"
-          />
-        </S.TopIcon>
-        <S.TopIconText className="KFoodTxt"> 한식 </S.TopIconText>
+          <S.IconBox onClick={() => handleCategoryClick("분식")}
+            className={selectedCategory === "분식" ? "active" : ""}
+          >
+            <S.TopIcon className="SnackFood">
+              {" "}
+              <img
+                src={`${process.env.PUBLIC_URL}/images/SnackFood.svg`}
+                alt="SnackFood"
+                width="40px"
+              />
+            </S.TopIcon>
+            <S.TopIconText className="SnackFoodTxt"> 분식 </S.TopIconText>
+          </S.IconBox>
 
-        <S.TopIcon className="SnackFood">
-          {" "}
-          <img
-            src={`${process.env.PUBLIC_URL}/images/SnackFood.svg`}
-            alt="SnackFood"
-            width="40px"
-          />
-        </S.TopIcon>
-        <S.TopIconText className="SnackFoodTxt"> 분식 </S.TopIconText>
+          <S.IconBox onClick={() => handleCategoryClick("일식")}
+            className={selectedCategory === "일식" ? "active" : ""}
+          >
+            <S.TopIcon className="JFood">
+              {" "}
+              <img
+                src={`${process.env.PUBLIC_URL}/images/JFood.svg`}
+                alt="JFood"
+                width="40px"
+              />
+            </S.TopIcon>
+            <S.TopIconText className="JFoodTxt"> 일식 </S.TopIconText>
+          </S.IconBox>
 
-        <S.TopIcon className="JFood">
-          {" "}
-          <img
-            src={`${process.env.PUBLIC_URL}/images/JFood.svg`}
-            alt="JFood"
-            width="40px"
-          />
-        </S.TopIcon>
-        <S.TopIconText className="JFoodTxt"> 일식 </S.TopIconText>
+          <S.IconBox onClick={() => handleCategoryClick("패스트푸드")}
+            className={selectedCategory === "패스트푸드" ? "active" : ""}
+          >
+            <S.TopIcon className="FastFood">
+              {" "}
+              <img
+                src={`${process.env.PUBLIC_URL}/images/FastFood.svg`}
+                alt="FastFood"
+                width="40px"
+              />
+            </S.TopIcon>
+            <S.TopIconText className="FastFoodTxt"> 패스트푸드 </S.TopIconText>
+          </S.IconBox>
 
-        <S.TopIcon className="FastFood">
-          {" "}
-          <img
-            src={`${process.env.PUBLIC_URL}/images/FastFood.svg`}
-            alt="FastFood"
-            width="40px"
-          />
-        </S.TopIcon>
-        <S.TopIconText className="FastFoodTxt"> 패스트푸드 </S.TopIconText>
-
-        <S.TopIcon className="Salad">
-          {" "}
-          <img
-            src={`${process.env.PUBLIC_URL}/images/Salad.svg`}
-            alt="Salad"
-            width="40px"
-          />
-        </S.TopIcon>
-        <S.TopIconText className="SaladTxt"> 샐러드 </S.TopIconText>
-
-        <S.SelectedBar></S.SelectedBar>
+          <S.IconBox onClick={() => handleCategoryClick("샐러드")}
+            className={selectedCategory === "샐러드" ? "active" : ""}
+          >
+            <S.TopIcon className="Salad">
+              {" "}
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Salad.svg`}
+                alt="Salad"
+                width="40px"
+              />
+            </S.TopIcon>
+            <S.TopIconText className="SaladTxt"> 샐러드 </S.TopIconText>
+          </S.IconBox>
+        </S.TopBox>
 
         {/* 모달창으로 변경함 */}
         <S.BasicLayer onClick={toggleModal}>
@@ -147,9 +192,9 @@ const Search = ({ dataList }) => {
           즐겨찾기 가게
         </S.Favorite>
         <S.ShopWrapper>
-          {dataList.map((e) => (
+          {filteredData.map((e) => (
             <S.ShopInform
-              key={e.ShopId}
+              key={e.shopId}
               onClick={() => navigate(`/ClickedSearch/${e.shopId}`)}
             >
               <S.LeftBox>
@@ -207,4 +252,4 @@ const Search = ({ dataList }) => {
   );
 };
 
-export default Search;
+export default SearchMain;

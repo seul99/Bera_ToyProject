@@ -64,79 +64,43 @@ export const LocationImg = styled.div`
   width: 18px;
   height: 18px;
 `;
-export const TopIcon = styled.div`
-  position: absolute;
-  top: 141px;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  aspect-ratio: 1/1;
 
-  &.Home {
-    left: 20px;
-  }
+export const IconBox = styled.div`
+  margin-right:20px;
+  border-bottom: 1px solid transparent; 
+  transition: border-bottom 0.2s ease;
 
-  &.Kfood {
-    left: 85px;
-  }
-
-  &.SnackFood {
-    left: 150px;
-  }
-
-  &.JFood {
-    left: 215px;
-  }
-
-  &.FastFood {
-    left: 280px;
-  }
-
-  &.Salad {
-    left: 345px;
+  &.active{
+  border-bottom: 1px solid black;
   }
 `;
+export const TopIcon = styled.button`
+  width: 40px;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  border:none;
+  background:transparent;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+`;
 export const TopIconText = styled.div`
-  position: absolute;
-  top: 185px;
   color: #000;
   font-family: Roboto;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
-  &.HomeTxt {
-    left: 35px;
-  }
-
-  &.KFoodTxt {
-    left: 95px;
-  }
-
-  &.SnackFoodTxt {
-    left: 160px;
-  }
-  &.JFoodTxt {
-    left: 225px;
-  }
-
-  &.FastFoodTxt {
-    left: 277px;
-  }
-
-  &.SaladTxt {
-    left: 351px;
-  }
 `;
-export const SelectedBar = styled.div`
-  position: absolute;
-  top: 200px;
-  left: 20px;
-  width: 40px;
-  height: 1px;
-  background: #000;
+
+export const TopBox = styled.div`
+  position:absolute;
+  top:140px;
+  left:25px;
+  display:flex;
 `;
+
 // 정렬 모달창
 export const BasicLayer = styled.div`
   position: absolute;

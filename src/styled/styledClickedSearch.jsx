@@ -221,6 +221,7 @@ export const Congestion = styled.div`
   font-weight: 500;
   line-height: 22px;
   font-weight: 600;
+  
     &.green{
     color: #4DC794;
   }

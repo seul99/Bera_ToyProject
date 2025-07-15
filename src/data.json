@@ -6,7 +6,8 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "여유"
+    "congestion": "여유",
+    "category": "한식"
   },
   {
     "shopId": 2,
@@ -15,7 +16,8 @@
     "distance": "304m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "보통"
+    "congestion": "보통",
+    "category": "일식"
   },
   {
     "shopId": 3,
@@ -24,7 +26,8 @@
     "distance": "618m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "혼잡"
+    "congestion": "혼잡",
+    "category": "분식"
   },
   {
     "shopId": 4,
@@ -33,7 +36,8 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "여유"
+    "congestion": "여유",
+    "category": "한식"
   },
   {
     "shopId": 5,
@@ -42,7 +46,8 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "혼잡"
+    "congestion": "혼잡",
+    "category": "패스트푸드"
   },
   {
     "shopId": 6,
@@ -51,7 +56,8 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "보통"
+    "congestion": "보통",
+    "category": "샐러드"
   },
   {
     "shopId": 7,
@@ -60,7 +66,8 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "혼잡잡"
+    "congestion": "혼잡",
+    "category": "한식"
   },
   {
     "shopId": 8,
@@ -69,6 +76,7 @@
     "distance": "292m",
     "minute": "도보N분",
     "population": "4/20명",
-    "congestion": "여유"
+    "congestion": "여유",
+    "category": "분식"
   }
 ]

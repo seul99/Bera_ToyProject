@@ -3,51 +3,39 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  margin: 0 auto;
   justify-content: center;
   align-items: center;
   display: flex;
-  flex-direction: column;
-  text-align: center;
   background: #f0f0f0f0;
-  position: relative;
 `;
 
 export const Box = styled.div`
-  position: relative;
-  margin: 0 auto;
+  box-sizing: border-box;
   width: 393px;
   height: 852px;
-  background: #fff;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+  background: #fff;  
+  padding-top:75px;
+  padding-left:31px;
 `;
-
+export const TopBox = styled.div`
+  display:flex;
+`;
 export const JoinText = styled.div`
-  position: relative;
-  top: 86px;
-  margin: 0 auto;
-  width: 59px;
-  height: 22px;
-  background: #fff;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   color: #006d77;
-  text-align: center;
   font-family: Roboto;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 135%; /* 21.6px */
 `;
+export const BackBtn = styled.div`
+  width: 31px;
+  height: 75px;
+  flex-shrink: 0;
+  margin-right:93px;
+  margin-bottom:50px;
+`;
+
 export const InputIdText = styled.div`
-  position: absolute;
-  top: 168px;
-  left: 30px;
-  width: 233px;
-  height: 28px;
   color: #70b9be;
   font-family: Roboto;
   font-size: 23px;
@@ -56,20 +44,16 @@ export const InputIdText = styled.div`
   line-height: normal;
 `;
 export const IdText = styled.div`
-  position: absolute;
-  top: 241px;
-  left: 30px;
-  color: #70b9be;
+
+  color: #70B9BE;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-top:43px;
 `;
 export const InputId = styled.input`
-  position: absolute;
-  top: 270px;
-  left: 30px;
   outline: none;
   border: none;
   border-bottom: 2px solid #70b9be;
@@ -81,23 +65,15 @@ export const InputId = styled.input`
   font-weight: bold;
 `;
 export const Caution = styled.div`
-  position: absolute;
-  top: 315px;
-  left: 30px;
-  width: 110px;
-  height: 14px;
   color: #a5a5a5;
   font-family: Roboto;
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 135%; /* 13.5px */
+  margin-bottom:30px;
 `;
 export const ContinueBtn = styled.button`
-  position: absolute;
   align-items: center;
-  top: 360px;
-  left: 30px;
   display: flex;
   width: 331px;
   height: 54px;
@@ -119,14 +95,4 @@ export const ContinueBtn = styled.button`
   &:hover {
     opacity: 80%;
   }
-`;
-export const BackBtn = styled.div`
-  position: absolute;
-  top: 65px;
-  left: 30px;
-  width: 31px;
-  height: 75px;
-  flex-shrink: 0;
-  margin-top: 28px;
-  margin-left: 26px;
 `;
