@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import * as I from "../styled/styledInputManager";
 import { useNavigate } from "react-router-dom";
 
-function InputManager() {
-  const navigate = useNavigate();
+function InputManager({ onClose, setInputData }) {
+  const [name, setName] = useState("");
+  const [current, setCurrent] = useState("");
+  const [total, setTotal] = useState("");
+
+  const handleSubmit = () => {
+    setInputData({
+      name: name || null,
+      current: current || null,
+      total: total || null,
+    });
+    onClose();
+  };
   return (
     <I.Container>
       <I.Box>
@@ -16,14 +27,38 @@ function InputManager() {
           </I.Title>
           <I.InputName>
             <I.Lable>가게이름</I.Lable>
-            <input type="text" placeholder="가게를 입력해주세요" />
+            <I.InputWrap>
+              <input
+                type="text"
+                placeholder="가게를 입력해주세요."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </I.InputWrap>
           </I.InputName>
-          <I.InputName>
+          <I.InputNum>
             <I.Lable>현재 손님 수</I.Lable>
-            <input type="text" placeholder="0명 / 00명" />
-          </I.InputName>
+            <I.InputWrap>
+              <input
+                className="numInRight"
+                type="number"
+                placeholder="0"
+                value={current}
+                onChange={(e) => setCurrent(e.target.value)}
+              />
+              <span>명 &nbsp;&nbsp; / </span>
+              <input
+                className="numInLeft"
+                type="number"
+                placeholder="00"
+                value={total}
+                onChange={(e) => setTotal(e.target.value)}
+              />
+              <span>명</span>
+            </I.InputWrap>
+          </I.InputNum>
 
-          <I.EndBtn onClick={() => navigate("/main")}>입력 완료</I.EndBtn>
+          <I.EndBtn onClick={handleSubmit}>입력 완료</I.EndBtn>
         </I.InputBox>
       </I.Box>
     </I.Container>

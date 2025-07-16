@@ -81,6 +81,7 @@ export const ProfileEdit = styled.div`
   display: flex;
   justify-content: center; // 가로 중앙
   align-items: center; // 세로 중앙
+  cursor: pointer;
 `;
 
 export const Setting = styled.div`
@@ -108,5 +109,9 @@ export const SettingText = styled.div`
     font-size: 15px;
     font-weight: 500;
     padding-bottom: 5px;
+    cursor: pointer;
+  }
+  &.sub: hover {
+    opacity: 70%;
   }
 `;

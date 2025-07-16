@@ -35,7 +35,9 @@ const MyPage = () => {
         <M.Setting>
           <M.SettingText className="title">설정</M.SettingText>
           <M.SettingText className="sub">비밀번호 변경</M.SettingText>
-          <M.SettingText className="sub">로그아웃 </M.SettingText>
+          <M.SettingText className="sub" onClick={() => navigate(`/`)}>
+            로그아웃
+          </M.SettingText>
           <M.SettingText className="sub">계정 탈퇴 </M.SettingText>
         </M.Setting>
 

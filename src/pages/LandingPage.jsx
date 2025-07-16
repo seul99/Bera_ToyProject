@@ -17,7 +17,7 @@ function LandingPage(props) {
         <L.StartBtn onClick={() => navigate("/start")}>시작하기</L.StartBtn>
         <L.GotoLogin>
           <p>이미 계정이 있나요?</p>
-          <L.LoginBtn>로그인</L.LoginBtn>
+          <L.LoginBtn onClick={() => navigate("/login")}>로그인</L.LoginBtn>
         </L.GotoLogin>
       </L.Box>
     </L.Container>

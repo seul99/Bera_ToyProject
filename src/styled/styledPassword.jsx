@@ -13,12 +13,12 @@ export const Box = styled.div`
   box-sizing: border-box;
   width: 393px;
   height: 852px;
-  background: #fff;  
-  padding-top:75px;
-  padding-left:31px;
+  background: #fff;
+  padding-top: 75px;
+  padding-left: 31px;
 `;
 export const TopBox = styled.div`
-  display:flex;
+  display: flex;
 `;
 
 export const JoinText = styled.div`
@@ -32,12 +32,13 @@ export const BackBtn = styled.div`
   width: 31px;
   height: 75px;
   flex-shrink: 0;
-  margin-right:93px;
-  margin-bottom:50px;
+  margin-right: 93px;
+  margin-bottom: 50px;
+  cursor: pointer;
 `;
 
 export const InputPwText = styled.div`
-  width: 250px;
+  width: 280px;
   height: 28px;
   color: #70b9be;
   font-family: Roboto;
@@ -45,7 +46,7 @@ export const InputPwText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom:45px;
+  margin-bottom: 45px;
 `;
 export const PwText = styled.div`
   color: #70b9be;
@@ -79,7 +80,6 @@ export const InputPw = styled.input`
   }
 `;
 export const Caution = styled.div`
-  width: 120px;
   height: 14px;
   color: #a5a5a5;
   font-family: Roboto;
@@ -87,11 +87,11 @@ export const Caution = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 135%; /* 13.5px */
-  margin-bottom:25px;
+  margin-bottom: 25px;
+  margin-top: 5px;
   &.reCaution {
-    margin-bottom:30px;
+    margin-bottom: 30px;
   }
-  
 `;
 export const ContinueBtn = styled.button`
   align-items: center;
@@ -113,7 +113,7 @@ export const ContinueBtn = styled.button`
   font-weight: 700;
   line-height: 135%; /* 21.6px */
   white-space: nowrap;
-
+  cursor: pointer;
   &:hover {
     opacity: 80%;
   }

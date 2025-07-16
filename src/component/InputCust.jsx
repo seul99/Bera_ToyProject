@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import * as I from "../styled/styledInputCust";
 import { useNavigate } from "react-router-dom";
 
-function InputCust() {
-  const navigate = useNavigate();
+function InputCust({ onClose, setInputData }) {
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [selectedWait, setSelectedWait] = useState(null);
+  const [selectedCongestion, setSelectedCongestion] = useState(null);
+
+  const handleSubmit = () => {
+    setInputData({
+      person: selectedPerson,
+      waitTime: selectedWait,
+      congestion: selectedCongestion,
+    });
+    onClose();
+  };
+
+  const personOptions = ["1명", "2명", "3명", "4명", "5명", "6명", "직접입력"];
+  const waitOptions = [
+    "바로 입장",
+    "10분 이내",
+    "20분 이내",
+    "30분 이내",
+    "1시간 이내",
+    "2시간 이내",
+    "2시간 이상",
+  ];
+  const congestionOptions = ["여유", "보통", "혼잡"];
+
   return (
     <I.Container>
       <I.Box>
@@ -25,30 +49,40 @@ function InputCust() {
           </I.BoxTitle>
           <I.ChoiceGruop>
             <I.BoxGroup>
-              <I.ChoiceBox>1명</I.ChoiceBox>
-              <I.ChoiceBox>2명</I.ChoiceBox>
-              <I.ChoiceBox>3명</I.ChoiceBox>
-              <I.ChoiceBox>4명</I.ChoiceBox>
-              <I.ChoiceBox>5명</I.ChoiceBox>
-              <I.ChoiceBox>6명</I.ChoiceBox>
-              <I.ChoiceBox>직접입력</I.ChoiceBox>
+              {personOptions.map((option, index) => (
+                <I.ChoiceBox
+                  key={index}
+                  className={selectedPerson === index ? "selected" : ""}
+                  onClick={() => setSelectedPerson(index)}
+                >
+                  {option}
+                </I.ChoiceBox>
+              ))}
             </I.BoxGroup>
             <I.BoxGroup>
-              <I.ChoiceBox>바로 입장</I.ChoiceBox>
-              <I.ChoiceBox>10분 이내</I.ChoiceBox>
-              <I.ChoiceBox>20분 이내</I.ChoiceBox>
-              <I.ChoiceBox>30분 이내</I.ChoiceBox>
-              <I.ChoiceBox>1시간 이내</I.ChoiceBox>
-              <I.ChoiceBox>2시간 이내</I.ChoiceBox>
-              <I.ChoiceBox>2시간 이상</I.ChoiceBox>
+              {waitOptions.map((option, index) => (
+                <I.ChoiceBox
+                  key={index}
+                  className={selectedWait === index ? "selected" : ""}
+                  onClick={() => setSelectedWait(index)}
+                >
+                  {option}
+                </I.ChoiceBox>
+              ))}
             </I.BoxGroup>
             <I.BoxGroup>
-              <I.ChoiceBox>여유</I.ChoiceBox>
-              <I.ChoiceBox>보통</I.ChoiceBox>
-              <I.ChoiceBox>혼잡</I.ChoiceBox>
+              {congestionOptions.map((option, index) => (
+                <I.ChoiceBox
+                  key={index}
+                  className={selectedCongestion === index ? "selected" : ""}
+                  onClick={() => setSelectedCongestion(index)}
+                >
+                  {option}
+                </I.ChoiceBox>
+              ))}
             </I.BoxGroup>
           </I.ChoiceGruop>
-          <I.EndBtn onClick={() => navigate("/main")}>입력 완료</I.EndBtn>
+          <I.EndBtn onClick={handleSubmit}>입력 완료</I.EndBtn>
         </I.InputBox>
       </I.Box>
     </I.Container>

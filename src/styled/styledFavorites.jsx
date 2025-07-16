@@ -55,8 +55,8 @@ export const StoreBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 30px;
-  padding-bottom: 20px;
+  box-sizing: border-box;
+  padding: 20px 30px;
   border-bottom: 0.7px solid #d9d9d9;
 `;
 export const LeftBox = styled.div`

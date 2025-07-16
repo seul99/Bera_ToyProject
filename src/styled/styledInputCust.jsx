@@ -3,15 +3,15 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
-  background: #f0f0f0f0;
-  position: relative;
+  position: fixed;
+  top: 0px;
+  left: 0px;
 `;
 export const Box = styled.div`
   width: 393px;
@@ -106,6 +106,10 @@ export const ChoiceBox = styled.div`
   justify-content: center;
   cursor: pointer;
   &:hover {
+    border: 1px solid #006d77;
+    color: #006d77;
+  }
+  &.selected {
     border: 1px solid #006d77;
     color: #006d77;
   }

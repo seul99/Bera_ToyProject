@@ -3,15 +3,15 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
-  background: #f0f0f0f0;
-  position: relative;
+  position: fixed;
+  top: 0px;
+  left: 0px;
 `;
 export const Box = styled.div`
   width: 393px;
@@ -48,6 +48,7 @@ export const InputName = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 20px 30px;
+  box-sizing: border-box;
   input {
     border: none;
     outline: none;
@@ -65,9 +66,61 @@ export const InputName = styled.div`
     text-align: center;
   }
 `;
+export const InputWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #d9d9d9;
+  color: #000;
+`;
+
+export const InputNum = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 30px;
+  box-sizing: border-box;
+  position: relative;
+  flex-direction: row;
+
+  input {
+    all: unset;
+    width: 40px;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: normal;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    & {
+      -moz-appearance: textfield;
+    }
+  }
+
+  span {
+    color: #000;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+`;
+
 export const Lable = styled.div`
   color: #000;
   font-family: Roboto;
+  width: 80px;
+  display: flex;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;

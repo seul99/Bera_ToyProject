@@ -13,12 +13,12 @@ export const Box = styled.div`
   box-sizing: border-box;
   width: 393px;
   height: 852px;
-  background: #fff;  
-  padding-top:75px;
-  padding-left:31px;
+  background: #fff;
+  padding-top: 75px;
+  padding-left: 31px;
 `;
 export const TopBox = styled.div`
-  display:flex;
+  display: flex;
 `;
 export const JoinText = styled.div`
   color: #006d77;
@@ -31,8 +31,9 @@ export const BackBtn = styled.div`
   width: 31px;
   height: 75px;
   flex-shrink: 0;
-  margin-right:93px;
-  margin-bottom:50px;
+  margin-right: 93px;
+  margin-bottom: 50px;
+  cursor: pointer;
 `;
 
 export const InputIdText = styled.div`
@@ -44,13 +45,13 @@ export const InputIdText = styled.div`
   line-height: normal;
 `;
 export const IdText = styled.div`
-  color: #70B9BE;
+  color: #70b9be;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-top:43px;
+  margin-top: 43px;
 `;
 export const InputId = styled.input`
   outline: none;
@@ -69,7 +70,7 @@ export const Caution = styled.div`
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 `;
 export const ContinueBtn = styled.button`
   align-items: center;
@@ -91,7 +92,7 @@ export const ContinueBtn = styled.button`
   font-weight: 700;
   line-height: 135%; /* 21.6px */
   white-space: nowrap;
-
+  cursor: pointer;
   &:hover {
     opacity: 80%;
   }

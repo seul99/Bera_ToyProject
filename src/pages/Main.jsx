@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MainLogo from "../component/MainLogo";
 import * as M from "../styled/styledMain";
 import NavigationBar from "../component/NavigationBar";
@@ -6,8 +6,22 @@ import CongestionList from "../component/CongestionList";
 import RecomendList from "../component/RecomendList";
 import SendCongestionList from "../component/SendCongestionList";
 import { useNavigate } from "react-router-dom";
+import InputCust from "../component/InputCust";
+import InputManager from "../component/InputManager";
+
 function Main(props) {
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(null);
+  const [custInputData, setCustInputData] = useState({
+    person: null,
+    waitTime: null,
+    congestion: null,
+  });
+  const [managerInputData, setManagerInputData] = useState({
+    name: null,
+    current: null,
+    total: null,
+  });
   return (
     <M.Container>
       <M.Box>
@@ -48,11 +62,29 @@ function Main(props) {
           <M.SendCongestion>
             <M.ContentBox>
               <M.Label>방문한 가게의 혼잡도를 알려주세요!</M.Label>
-              <SendCongestionList />
+              <SendCongestionList
+                setShowModal={setShowModal}
+                custInputData={custInputData}
+                managerInputData={managerInputData}
+              />
             </M.ContentBox>
           </M.SendCongestion>
         </M.MainContent>
-        <NavigationBar />
+        {showModal === null && <NavigationBar />}
+
+        {showModal === "cust" && (
+          <InputCust
+            onClose={() => setShowModal(null)}
+            setInputData={setCustInputData}
+          />
+        )}
+
+        {showModal === "manager" && (
+          <InputManager
+            onClose={() => setShowModal(null)}
+            setInputData={setManagerInputData}
+          />
+        )}
       </M.Box>
     </M.Container>
   );

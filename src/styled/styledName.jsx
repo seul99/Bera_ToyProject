@@ -13,13 +13,13 @@ export const Box = styled.div`
   box-sizing: border-box;
   width: 393px;
   height: 852px;
-  background: #fff;  
-  padding-top:75px;
-  padding-left:31px;
+  background: #fff;
+  padding-top: 75px;
+  padding-left: 31px;
 `;
 
 export const TopBox = styled.div`
-  display:flex;
+  display: flex;
 `;
 
 export const JoinText = styled.div`
@@ -33,8 +33,9 @@ export const BackBtn = styled.div`
   width: 31px;
   height: 75px;
   flex-shrink: 0;
-  margin-right:93px;
-  margin-bottom:60px;
+  margin-right: 93px;
+  margin-bottom: 60px;
+  cursor: pointer;
 `;
 
 export const InputIdText = styled.div`
@@ -46,7 +47,7 @@ export const InputIdText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom:45px;
+  margin-bottom: 45px;
 `;
 export const IdText = styled.div`
   color: #70b9be;
@@ -67,7 +68,7 @@ export const InputId = styled.input`
   flex-shrink: 0;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 `;
 
 export const ContinueBtn = styled.button`
@@ -90,7 +91,7 @@ export const ContinueBtn = styled.button`
   font-weight: 700;
   line-height: 135%; /* 21.6px */
   white-space: nowrap;
-
+  cursor: pointer;
   &:hover {
     opacity: 80%;
   }
