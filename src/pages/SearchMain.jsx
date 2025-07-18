@@ -1,9 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../styled/styledSearch";
 import NavigationBar from "../component/NavigationBar";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
-const SearchMain = ({ dataList }) => {
+const SearchMain = () => {
+  const [dataList, setDataList] = useState([]);
+  const [error, setError] = useState("");
+
+  // 검색창 모달로 띄우기
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sortText, setSortText] = useState("기본순");
+
+  // 버튼 값 가져오기
+  const location = useLocation();
+  const [mainCategory] = useState(location.state?.category || "restaurant");
+  const [subCategory, setSubCategory] = useState("전체");
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+      let url = `http://localhost:8000/stores/?category=${mainCategory}`;
+      if (mainCategory === "restaurant" && subCategory !== "전체") {
+        url += `&subcategory=${subCategory}`;
+      }
+
+      try {
+        const res = await axios.get(url, {
+          headers: { Authorization: `Token ${token}` },
+        });
+        setDataList(res.data);
+      } catch (err) {
+        console.error("에러 발생:", err);
+        setError("데이터를 불러올 수 없습니다.");
+      }
+    };
+
+    fetchData();
+  }, [mainCategory, subCategory]);
+
   const [isActive, setIsActive] = useState(false);
   const on_Click = () => {
     setIsActive((prev) => !prev);
@@ -12,13 +52,6 @@ const SearchMain = ({ dataList }) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(`/main`);
-  };
-
-  // 검색창 모달로 띄우기
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sortText, setSortText] = useState("기본순");
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
   };
 
   const handleSelect = (text) => {
@@ -33,18 +66,16 @@ const SearchMain = ({ dataList }) => {
   };
 
   //카테고리 필터링
-  const [selectedCategory, setSelectedCategory] = useState("전체");
   const filteredData = dataList.filter((item) => {
-    const matchTitle = item.title.toLowerCase().includes(search.toLowerCase());
+    const matchTitle = item.name.toLowerCase().includes(search.toLowerCase());
     const matchCategory =
-      selectedCategory === "전체" || item.category === selectedCategory;
+      subCategory === "전체" || item.subcategory === subCategory;
     return matchTitle && matchCategory;
   });
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    setSubCategory(category);
   };
-
   return (
     <S.Container>
       <S.Box>
@@ -68,7 +99,7 @@ const SearchMain = ({ dataList }) => {
         <S.TopBox>
           <S.IconBox
             onClick={() => handleCategoryClick("전체")}
-            className={selectedCategory === "전체" ? "active" : ""}
+            className={subCategory === "전체" ? "active" : ""}
           >
             <S.TopIcon className="Home">
               {" "}
@@ -82,8 +113,8 @@ const SearchMain = ({ dataList }) => {
           </S.IconBox>
 
           <S.IconBox
-            onClick={() => handleCategoryClick("한식")}
-            className={selectedCategory === "한식" ? "active" : ""}
+            onClick={() => setSubCategory("korean")}
+            className={subCategory === "korean" ? "active" : ""}
           >
             <S.TopIcon className="Kfood">
               {" "}
@@ -97,8 +128,8 @@ const SearchMain = ({ dataList }) => {
           </S.IconBox>
 
           <S.IconBox
-            onClick={() => handleCategoryClick("분식")}
-            className={selectedCategory === "분식" ? "active" : ""}
+            onClick={() => setSubCategory("snack")}
+            className={subCategory === "snack" ? "active" : ""}
           >
             <S.TopIcon className="SnackFood">
               {" "}
@@ -112,8 +143,8 @@ const SearchMain = ({ dataList }) => {
           </S.IconBox>
 
           <S.IconBox
-            onClick={() => handleCategoryClick("일식")}
-            className={selectedCategory === "일식" ? "active" : ""}
+            onClick={() => setSubCategory("japanese")}
+            className={subCategory === "japanese" ? "active" : ""}
           >
             <S.TopIcon className="JFood">
               {" "}
@@ -127,8 +158,8 @@ const SearchMain = ({ dataList }) => {
           </S.IconBox>
 
           <S.IconBox
-            onClick={() => handleCategoryClick("패스트푸드")}
-            className={selectedCategory === "패스트푸드" ? "active" : ""}
+            onClick={() => setSubCategory("fastfood")}
+            className={subCategory === "fastfood" ? "active" : ""}
           >
             <S.TopIcon className="FastFood">
               {" "}
@@ -142,8 +173,8 @@ const SearchMain = ({ dataList }) => {
           </S.IconBox>
 
           <S.IconBox
-            onClick={() => handleCategoryClick("샐러드")}
-            className={selectedCategory === "샐러드" ? "active" : ""}
+            onClick={() => setSubCategory("salad")}
+            className={subCategory === "salad" ? "active" : ""}
           >
             <S.TopIcon className="Salad">
               {" "}
@@ -198,8 +229,8 @@ const SearchMain = ({ dataList }) => {
         <S.ShopWrapper>
           {filteredData.map((e) => (
             <S.ShopInform
-              key={e.shopId}
-              onClick={() => navigate(`/ClickedSearch/${e.shopId}`)}
+              key={e.id}
+              onClick={() => navigate(`/ClickedSearch/${e.id}`)}
             >
               <S.LeftBox>
                 <S.ShopImg style={{ marginRight: "16px" }}>
@@ -213,14 +244,14 @@ const SearchMain = ({ dataList }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <S.ShopName>{e.title}</S.ShopName>
+                  <S.ShopName>{e.name}</S.ShopName>
                   <S.ReviewText>
                     <img
                       src={`${process.env.PUBLIC_URL}/images/Star.svg`}
                       alt="Star"
                       width="18px"
                     />{" "}
-                    {e.review}
+                    {e.rating}
                   </S.ReviewText>
                   <S.DistanceText>
                     <img
