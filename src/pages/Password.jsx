@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as P from "../styled/styledPassword";
+import { useLocation } from "react-router-dom";
 
 const Password = () => {
   const navigate = useNavigate();
@@ -8,9 +9,12 @@ const Password = () => {
   const [pw, setPw] = useState("");
   const [conPw, setconPw] = useState("");
 
+  const location = useLocation();
+  const id = location.state?.id;
+
   const goName = () => {
     if (pw.length >= 8 && pw === conPw) {
-      navigate(`/Name`);
+      navigate(`/Name`, { state: { id, password: pw } });
     }
   };
 
