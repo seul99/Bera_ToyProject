@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as L from "../styled/styledLogin";
+import axios from "axios";
 function Login(props) {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/rest-auth/login/", {
+        username,
+        password,
+      });
+
+      const token = res.data.key;
+      localStorage.setItem("token", token);
+      navigate("/main");
+    } catch (error) {
+      alert("로그인 실패: 아이디 또는 비밀번호를 확인해주세요");
+    }
+  };
+
+  const handleKakao = async () => {
+    window.location.href = "http://localhost:8000/authaccounts/kakao/login/";
+  };
+
   return (
     <L.Container>
       <L.Box>
@@ -19,14 +41,22 @@ function Login(props) {
           <L.InputGroup>
             <L.Row>
               <label>아이디</label>
-              <input type="text"></input>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              ></input>
             </L.Row>
             <L.Row>
               <label>비밀번호</label>
-              <input type="text"></input>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
             </L.Row>
           </L.InputGroup>
-          <L.LoginBtn onClick={() => navigate("/main")}>로그인</L.LoginBtn>
+          <L.LoginBtn onClick={handleLogin}>로그인</L.LoginBtn>
           <L.CheckGroup>
             <div className="loginCheck">
               <img
@@ -41,11 +71,13 @@ function Login(props) {
         <L.Line>간편로그인</L.Line>
         <L.KakaoBtn>
           <img src={`${process.env.PUBLIC_URL}/images/kakao.svg`} alt="kakao" />
-          <p>카카오톡으로 로그인</p>
+          <p onClick={handleKakao}>카카오톡으로 로그인</p>
         </L.KakaoBtn>
         <L.GotoSignup>
           <p>첫 방문이신가요?</p>
-          <p className="goto">회원가입 바로가기</p>
+          <p className="goto" onClick={() => navigate("/Start")}>
+            회원가입 바로가기
+          </p>
         </L.GotoSignup>
       </L.Box>
     </L.Container>
