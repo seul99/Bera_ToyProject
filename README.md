@@ -13,10 +13,12 @@
 ⦁	가게 기본순 정렬 <br>
 ⦁	가게 별점 높은 순 정렬 <br>
 ⦁	가게 여유로운 순 정렬 <br>
+
  <br>
 main 에서 버튼마다 음식점, 카페 데이터를 전송하게만듬 <br>
 SearchMain 에서 userLocation 선언 <br>
  <br>
+ 
 카페조회 api 명세서에 있는 주소 수정함 <br>
 SearchMain 에 한식,중식 이런거 싹다 api 명세서에 적혀있는대로 수정완료 <br>
 ```
