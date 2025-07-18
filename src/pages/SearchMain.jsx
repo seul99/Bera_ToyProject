@@ -8,6 +8,7 @@ import axios from "axios";
 const SearchMain = () => {
   const [dataList, setDataList] = useState([]);
   const [error, setError] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   // 검색창 모달로 띄우기
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,29 +23,18 @@ const SearchMain = () => {
     setIsModalOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      let url = `http://localhost:8000/stores/?category=${mainCategory}`;
-      if (mainCategory === "restaurant" && subCategory !== "전체") {
-        url += `&subcategory=${subCategory}`;
-      }
+  const getOrdering = () => {
+    switch (sortText) {
+      case "별점 높은 순":
+        return "-rating";
+      case "여유로운 순":
+        return "population_ratio";
+      //가까운 순 api 없음
+      default:
+        return ""; //기본 순
+    }
+  };
 
-      try {
-        const res = await axios.get(url, {
-          headers: { Authorization: `Token ${token}` },
-        });
-        setDataList(res.data);
-      } catch (err) {
-        console.error("에러 발생:", err);
-        setError("데이터를 불러올 수 없습니다.");
-      }
-    };
-
-    fetchData();
-  }, [mainCategory, subCategory]);
-
-  const [isActive, setIsActive] = useState(false);
   const on_Click = () => {
     setIsActive((prev) => !prev);
   };
@@ -76,6 +66,42 @@ const SearchMain = () => {
   const handleCategoryClick = (category) => {
     setSubCategory(category);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+
+      //음식점별 조회 api
+      let url = `http://localhost:8000/stores/?category=${mainCategory}`;
+      // 음식 카테고리별 조회
+      if (mainCategory === "restaurant" && subCategory !== "전체") {
+        url += `&subcategory=${subCategory}`;
+      }
+      // 즐겨찾기한 가게만 필터링
+      if (isActive) {
+        url += `&bookmarked=true`;
+      }
+
+      // 정렬
+      const ordering = getOrdering();
+      if (ordering) {
+        url += `&ordering=${ordering}`;
+      }
+
+      try {
+        const res = await axios.get(url, {
+          headers: { Authorization: `Token ${token}` },
+        });
+        setDataList(res.data);
+      } catch (err) {
+        console.error("가게 데이터 불러오기 실패:", err);
+        setError("데이터를 불러오지 못했습니다.");
+      }
+    };
+
+    fetchData();
+  }, [mainCategory, subCategory, isActive, sortText]);
+
   return (
     <S.Container>
       <S.Box>
