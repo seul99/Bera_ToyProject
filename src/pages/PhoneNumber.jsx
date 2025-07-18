@@ -1,14 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as P from "../styled/styledPhoneNumber";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const PhoneNumber = () => {
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const { id, password, name } = location.state;
   const [phoneNumber, setPhoneNumber] = useState("");
-  const goMain = () => {
-    if (phoneNumber.length === 11) {
-      navigate(`/main`);
+
+  const handleSignup = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/user/", {
+        username: id,
+        password: password,
+        first_name: name,
+        phone: phoneNumber,
+      });
+
+      console.log("회원가입 성공", res.data);
+      navigate("/main");
+    } catch (error) {
+      console.error("회원가입 실패", error.response?.data || error.message);
+
+      if (error.response?.data) {
+        alert(
+          "회원가입 실패:\n" + JSON.stringify(error.response.data, null, 2)
+        );
+      } else {
+        alert("회원가입 실패:\n" + error.message);
+      }
     }
   };
 
@@ -36,7 +59,10 @@ const PhoneNumber = () => {
           onChange={(e) => setPhoneNumber(e.target.value)}
           placeholder="01012340000"
         />
-        <P.ContinueBtn onClick={goMain} active={phoneNumber.length === 11}>
+        <P.ContinueBtn
+          onClick={handleSignup}
+          active={phoneNumber.length === 11}
+        >
           회원가입 완료
         </P.ContinueBtn>
       </P.Box>

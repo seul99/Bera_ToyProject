@@ -64,6 +64,13 @@ export const InputId = styled.input`
   font-size: 18px;
   font-weight: bold;
 `;
+
+export const CautionWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+`;
 export const Caution = styled.div`
   color: #a5a5a5;
   font-family: Roboto;
@@ -71,6 +78,18 @@ export const Caution = styled.div`
   font-style: normal;
   font-weight: 700;
   margin-bottom: 30px;
+`;
+export const RCaution = styled.div`
+  color: #006d77s;
+  font-family: Roboto;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  margin-left: 100px;
+  color: ${({ isTaken }) =>
+    isTaken === null ? "#006D77" : isTaken ? "red" : "#006D77"};
 `;
 export const ContinueBtn = styled.button`
   align-items: center;

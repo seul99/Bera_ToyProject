@@ -29,9 +29,8 @@ const SearchMain = ({ dataList }) => {
   //검색 기능
   const [search, setSearch] = useState("");
   const onChange = (e) => {
-    setSearch(e.target.value)
-  }
-
+    setSearch(e.target.value);
+  };
 
   //카테고리 필터링
   const [selectedCategory, setSelectedCategory] = useState("전체");
@@ -45,7 +44,6 @@ const SearchMain = ({ dataList }) => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
-
 
   return (
     <S.Container>
@@ -68,7 +66,8 @@ const SearchMain = ({ dataList }) => {
         </S.LocationImg>
         <S.LocationText>성북구 하월곡동</S.LocationText>
         <S.TopBox>
-          <S.IconBox onClick={() => handleCategoryClick("전체")}
+          <S.IconBox
+            onClick={() => handleCategoryClick("전체")}
             className={selectedCategory === "전체" ? "active" : ""}
           >
             <S.TopIcon className="Home">
@@ -82,7 +81,8 @@ const SearchMain = ({ dataList }) => {
             <S.TopIconText className="HomeTxt"> 홈 </S.TopIconText>
           </S.IconBox>
 
-          <S.IconBox onClick={() => handleCategoryClick("한식")}
+          <S.IconBox
+            onClick={() => handleCategoryClick("한식")}
             className={selectedCategory === "한식" ? "active" : ""}
           >
             <S.TopIcon className="Kfood">
@@ -96,7 +96,8 @@ const SearchMain = ({ dataList }) => {
             <S.TopIconText className="KFoodTxt"> 한식 </S.TopIconText>
           </S.IconBox>
 
-          <S.IconBox onClick={() => handleCategoryClick("분식")}
+          <S.IconBox
+            onClick={() => handleCategoryClick("분식")}
             className={selectedCategory === "분식" ? "active" : ""}
           >
             <S.TopIcon className="SnackFood">
@@ -110,7 +111,8 @@ const SearchMain = ({ dataList }) => {
             <S.TopIconText className="SnackFoodTxt"> 분식 </S.TopIconText>
           </S.IconBox>
 
-          <S.IconBox onClick={() => handleCategoryClick("일식")}
+          <S.IconBox
+            onClick={() => handleCategoryClick("일식")}
             className={selectedCategory === "일식" ? "active" : ""}
           >
             <S.TopIcon className="JFood">
@@ -124,7 +126,8 @@ const SearchMain = ({ dataList }) => {
             <S.TopIconText className="JFoodTxt"> 일식 </S.TopIconText>
           </S.IconBox>
 
-          <S.IconBox onClick={() => handleCategoryClick("패스트푸드")}
+          <S.IconBox
+            onClick={() => handleCategoryClick("패스트푸드")}
             className={selectedCategory === "패스트푸드" ? "active" : ""}
           >
             <S.TopIcon className="FastFood">
@@ -138,7 +141,8 @@ const SearchMain = ({ dataList }) => {
             <S.TopIconText className="FastFoodTxt"> 패스트푸드 </S.TopIconText>
           </S.IconBox>
 
-          <S.IconBox onClick={() => handleCategoryClick("샐러드")}
+          <S.IconBox
+            onClick={() => handleCategoryClick("샐러드")}
             className={selectedCategory === "샐러드" ? "active" : ""}
           >
             <S.TopIcon className="Salad">
@@ -236,8 +240,8 @@ const SearchMain = ({ dataList }) => {
                     e.congestion === "여유"
                       ? "/images/statusStar/greensom.svg"
                       : e.congestion === "보통"
-                        ? "/images/statusStar/yellowsom.svg"
-                        : "/images/statusStar/redsom.svg"
+                      ? "/images/statusStar/yellowsom.svg"
+                      : "/images/statusStar/redsom.svg"
                   }
                   alt="CongestionImg"
                   width="42px"
