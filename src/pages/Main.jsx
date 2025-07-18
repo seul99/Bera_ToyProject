@@ -40,10 +40,20 @@ function Main(props) {
           <M.ContentBox>
             <M.Label>가게 리스트</M.Label>
             <M.GoBtnGroup>
-              <button type="button" onClick={() => navigate("/SearchMain")}>
+              <button
+                type="button"
+                onClick={() =>
+                  navigate("/SearchMain", { state: { category: "restaurant" } })
+                }
+              >
                 음식점
               </button>
-              <button type="button" onClick={() => navigate("/SearchMain")}>
+              <button
+                type="button"
+                onClick={() =>
+                  navigate("/SearchMain", { state: { category: "cafe" } })
+                }
+              >
                 카페/디저트
               </button>
             </M.GoBtnGroup>
