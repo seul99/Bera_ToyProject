@@ -42,7 +42,7 @@ export const BackBtn = styled.div`
   }
 `;
 
-export const ShopImg = styled.div`
+export const ShopImg = styled.img`
   position: absolute;
   top: 101px;
   width: 397px;

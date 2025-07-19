@@ -254,9 +254,10 @@ const SearchMain = () => {
         </S.Favorite>
         <S.ShopWrapper>
           {filteredData.map((e) => (
+            console.log("shop정보:", e),
             <S.ShopInform
               key={e.id}
-              onClick={() => navigate(`/ClickedSearch/${e.id}`)}
+              onClick={() => navigate(`/ClickedSearch/${e.id}`, { state: { shop: e } })}
             >
               <S.LeftBox>
                 <S.ShopImg src={`http://localhost:8000/store_photo/${e.name}.png`} width="55px" alt={e.name} style={{ marginRight: "16px" }} />
