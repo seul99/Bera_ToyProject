@@ -51,7 +51,7 @@ const ClickedSearch = ({ dataList }) => {
         </CS.TopBox>
 
         <CS.ShopImg>가게 이미지</CS.ShopImg>
-        <CS.ShopName>{Shop.title}</CS.ShopName>
+        <CS.ShopName>{Shop.name}</CS.ShopName>
 
         <CS.InformWrapper className="review">
           <CS.InformImg>

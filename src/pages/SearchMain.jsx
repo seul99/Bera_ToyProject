@@ -259,10 +259,7 @@ const SearchMain = () => {
               onClick={() => navigate(`/ClickedSearch/${e.id}`)}
             >
               <S.LeftBox>
-                <S.ShopImg style={{ marginRight: "16px" }}>
-                  <span>가게</span>
-                  <span>이미지</span>
-                </S.ShopImg>
+                <S.ShopImg src={`http://localhost:8000/store_photo/${e.name}.png`} width="55px" alt={e.name} style={{ marginRight: "16px" }} />
                 <div
                   style={{
                     display: "flex",
@@ -294,11 +291,11 @@ const SearchMain = () => {
               <S.CongestionImg>
                 <img
                   src={
-                    e.congestion === "여유"
+                    e.congestion === "low"
                       ? "/images/statusStar/greensom.svg"
-                      : e.congestion === "보통"
-                      ? "/images/statusStar/yellowsom.svg"
-                      : "/images/statusStar/redsom.svg"
+                      : e.congestion === "medium"
+                        ? "/images/statusStar/yellowsom.svg"
+                        : "/images/statusStar/redsom.svg"
                   }
                   alt="CongestionImg"
                   width="42px"
