@@ -160,7 +160,7 @@ export const SubText = styled.div`
   line-height: normal;
   display: flex;
   align-items: center; // 세로 중앙
-
+  cursor:pointer;
   &.link {
     color: #70b9be;
     font-weight: 700;
