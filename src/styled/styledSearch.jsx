@@ -210,7 +210,7 @@ export const LeftBox = styled.div`
 export const CongestionImg = styled.div`
   display: flex;
 `;
-export const ShopImg = styled.div`
+export const ShopImg = styled.img`
   width: 55px;
   height: 55px;
   flex-shrink: 0;
