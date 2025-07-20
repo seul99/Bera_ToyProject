@@ -280,7 +280,7 @@ const SearchMain = () => {
                       alt="Star"
                       width="18px"
                     />{" "}
-                    {e.rating}
+                    {e.rating}/5.0
                   </S.ReviewText>
                   <S.DistanceText>
                     <img

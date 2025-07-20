@@ -49,11 +49,41 @@ const ClickedSearch = () => {
     navigate(`/SearchMain`);
   };
 
+  //방문기록
+  const [visitData, setVisitData] = useState(null);
+  const [noVisitData, setNoVisitData] = useState(false);
+
   useEffect(() => {
-    if (Shop) {
+    const fetchVisitData = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/stores/${Shop.id}/visit/latest/`,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          setVisitData(res.data);
+        }
+      } catch (err) {
+        if (err.response?.status === 204) {
+          setNoVisitData(true); // 방문 기록 없음
+        } else {
+          console.error("방문 기록 조회 실패:", err);
+        }
+      }
+    };
+
+    if (Shop?.id) {
       setIsLiked(Shop.is_bookmarked);
+      fetchVisitData(); // ← 여기에서 호출
     }
   }, [Shop]);
+
 
   return (
     <CS.Container>
@@ -90,7 +120,7 @@ const ClickedSearch = () => {
               width="25px"
             />
           </CS.InformImg>
-          <CS.InformText> {Shop.rating}</CS.InformText>
+          <CS.InformText> {Shop.rating}/5.0</CS.InformText>
         </CS.InformWrapper>
 
         <CS.InformWrapper className="distance">
@@ -101,11 +131,11 @@ const ClickedSearch = () => {
               width="25px"
             />
           </CS.InformImg>
-          <CS.InformText> {Shop.distance}</CS.InformText>
+          <CS.InformText> {Shop.latitude}m</CS.InformText>
         </CS.InformWrapper>
 
         <CS.InformWrapper className="minute">
-          <CS.InformText className="minute"> {Shop.minute}</CS.InformText>
+          <CS.InformText className="minute"> 도보{Shop.longitude}분</CS.InformText>
         </CS.InformWrapper>
 
         <CS.TitleText className="congestion">현재 혼잡도</CS.TitleText>
@@ -186,22 +216,35 @@ const ClickedSearch = () => {
             width="22px"
             style={{ padding: "11px" }}
           />
-          <CS.VisitText>4명 방문</CS.VisitText>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
-            alt="Dot"
-            width="5px"
-            style={{ padding: "10px" }}
-          />
-          <CS.VisitText>바로입장</CS.VisitText>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
-            alt="Dot"
-            width="5px"
-            style={{ padding: "10px" }}
-          />
-          <CS.VisitText>혼잡도 보통</CS.VisitText>
-          <CS.VisitTime>10분전</CS.VisitTime>
+          {visitData ? (
+            <>
+              <CS.VisitText>{visitData.visit_count}명 방문</CS.VisitText>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
+                alt="Dot"
+                width="5px"
+                style={{ padding: "10px" }}
+              />
+              <CS.VisitText>{visitData.wait_time}</CS.VisitText>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
+                alt="Dot"
+                width="5px"
+                style={{ padding: "10px" }}
+              />
+              <CS.VisitText>혼잡도 {visitData.congestion}</CS.VisitText>
+              <CS.VisitTime>
+                {new Date(visitData.created_at).toLocaleTimeString("ko-KR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </CS.VisitTime>
+            </>
+          ) : noVisitData ? (
+            <CS.VisitText>아직 방문 기록이 없습니다.</CS.VisitText>
+          ) : (
+            <CS.VisitText>방문 기록 불러오는 중...</CS.VisitText>
+          )}
         </CS.VisitWrapper>
 
         <NavigationBar />

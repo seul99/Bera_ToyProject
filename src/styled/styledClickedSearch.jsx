@@ -269,7 +269,7 @@ export const VisitText = styled.div`
 
 export const VisitTime = styled.div`
   position: relative;
-  left: 50px;
+  left: 30px;
   color: #f24253;
   font-family: Roboto;
   font-size: 10px;
