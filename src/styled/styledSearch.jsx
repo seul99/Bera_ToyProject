@@ -210,7 +210,7 @@ export const LeftBox = styled.div`
 export const CongestionImg = styled.div`
   display: flex;
 `;
-export const ShopImg = styled.div`
+export const ShopImg = styled.img`
   width: 55px;
   height: 55px;
   flex-shrink: 0;
@@ -267,7 +267,7 @@ export const Minute = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-left: 3px;
+  margin-left: 8px;
 `;
 
 export const BottomBar = styled.div`
@@ -304,4 +304,14 @@ export const BottomImg = styled.div`
     height: 41.09px;
     left: 314px;
   }
+`;
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 10;
 `;

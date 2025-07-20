@@ -29,7 +29,8 @@ const SearchMain = () => {
         return "-rating";
       case "여유로운 순":
         return "population_ratio";
-      //가까운 순 api 없음
+      case "가까운 순":
+        return "distance";
       default:
         return ""; //기본 순
     }
@@ -92,7 +93,15 @@ const SearchMain = () => {
         const res = await axios.get(url, {
           headers: { Authorization: `Token ${token}` },
         });
-        setDataList(res.data);
+        //가까운순
+        let fetchedData = res.data;
+
+        const ordering = getOrdering();
+        if (ordering === "distance") {
+          fetchedData = [...fetchedData].sort((a, b) => a.latitude - b.latitude); // 가까운순
+        }
+
+        setDataList(fetchedData);
       } catch (err) {
         console.error("가게 데이터 불러오기 실패:", err);
         setError("데이터를 불러오지 못했습니다.");
@@ -226,20 +235,16 @@ const SearchMain = () => {
         </S.BasicLayer>
 
         {isModalOpen && (
-          <S.ModalBox>
-            <S.ModalItem onClick={() => handleSelect("기본 순")}>
-              기본 순
-            </S.ModalItem>
-            <S.ModalItem onClick={() => handleSelect("가까운 순")}>
-              가까운 순
-            </S.ModalItem>
-            <S.ModalItem onClick={() => handleSelect("여유로운 순")}>
-              여유로운 순
-            </S.ModalItem>
-            <S.ModalItem onClick={() => handleSelect("별점 높은 순")}>
-              별점 높은 순
-            </S.ModalItem>
-          </S.ModalBox>
+          <>
+            <S.ModalOverlay onClick={toggleModal} />
+
+            <S.ModalBox>
+              <S.ModalItem onClick={() => handleSelect("기본 순")}>기본 순</S.ModalItem>
+              <S.ModalItem onClick={() => handleSelect("가까운 순")}>가까운 순</S.ModalItem>
+              <S.ModalItem onClick={() => handleSelect("여유로운 순")}>여유로운 순</S.ModalItem>
+              <S.ModalItem onClick={() => handleSelect("별점 높은 순")}>별점 높은 순</S.ModalItem>
+            </S.ModalBox>
+          </>
         )}
 
         {/* 버튼 누르면 색 변경 */}
@@ -254,15 +259,13 @@ const SearchMain = () => {
         </S.Favorite>
         <S.ShopWrapper>
           {filteredData.map((e) => (
+            console.log("shop정보:", e),
             <S.ShopInform
               key={e.id}
-              onClick={() => navigate(`/ClickedSearch/${e.id}`)}
+              onClick={() => navigate(`/ClickedSearch/${e.id}`, { state: { shop: e } })}
             >
               <S.LeftBox>
-                <S.ShopImg style={{ marginRight: "16px" }}>
-                  <span>가게</span>
-                  <span>이미지</span>
-                </S.ShopImg>
+                <S.ShopImg src={`http://localhost:8000/store_photo/${e.name}.png`} width="55px" alt={e.name} style={{ marginRight: "16px" }} />
                 <div
                   style={{
                     display: "flex",
@@ -277,7 +280,7 @@ const SearchMain = () => {
                       alt="Star"
                       width="18px"
                     />{" "}
-                    {e.rating}
+                    {e.rating}/5.0
                   </S.ReviewText>
                   <S.DistanceText>
                     <img
@@ -286,7 +289,7 @@ const SearchMain = () => {
                       alt="Distance"
                       width="18px"
                     />
-                    {e.distance} <S.Minute>{e.minute}</S.Minute>
+                    {e.latitude}m <S.Minute>도보{e.longitude}분</S.Minute>
                   </S.DistanceText>
                 </div>
               </S.LeftBox>
@@ -294,11 +297,11 @@ const SearchMain = () => {
               <S.CongestionImg>
                 <img
                   src={
-                    e.congestion === "여유"
+                    e.congestion === "low"
                       ? "/images/statusStar/greensom.svg"
-                      : e.congestion === "보통"
-                      ? "/images/statusStar/yellowsom.svg"
-                      : "/images/statusStar/redsom.svg"
+                      : e.congestion === "medium"
+                        ? "/images/statusStar/yellowsom.svg"
+                        : "/images/statusStar/redsom.svg"
                   }
                   alt="CongestionImg"
                   width="42px"

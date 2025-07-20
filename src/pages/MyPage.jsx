@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as M from "../styled/styledMyPage";
 import NavigationBar from "../component/NavigationBar";
+import axios from "axios";
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const [nickname, setNickname] = useState("닉네임");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    axios.get("http://localhost:8000/rest-auth/user/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((res) => {
+        setNickname(res.data.first_name);  // '하연' 사용
+      })
+      .catch((err) => {
+        console.error("유저 정보 요청 실패", err);
+      });
+  }, []);
 
   return (
     <M.Container>
@@ -22,7 +40,7 @@ const MyPage = () => {
             src={`${process.env.PUBLIC_URL}/images/ProfileWrapper.svg`}
             alt="ProfileBackground"
           />
-          <M.ProfileName>빠릿빠릿 솜솜</M.ProfileName>
+          <M.ProfileName>{nickname}</M.ProfileName>
           <M.ProfileEdit>프로필 수정</M.ProfileEdit>
           <M.ProfileBG>
             <img

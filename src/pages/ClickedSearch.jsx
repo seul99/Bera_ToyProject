@@ -1,31 +1,90 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as CS from "../styled/styledClickedSearch";
+import { useLocation } from "react-router-dom";
 import NavigationBar from "../component/NavigationBar";
+import axios from "axios";
 
 function BarColor(congestion) {
-  if (congestion === "여유")
+  if (congestion === "low")
     return "green"
-  else if (congestion === "보통")
+  else if (congestion === "medium")
     return "yellow"
-  else if (congestion === "혼잡")
+  else if (congestion === "high")
     return "red"
 }
-const ClickedSearch = ({ dataList }) => {
+
+
+const ClickedSearch = () => {
+
+  const location = useLocation();
+  const Shop = location.state?.shop;
+
   // 즐겨찾기 버튼
   const [isLiked, setIsLiked] = useState(false);
-  const clickLike = () => {
-    setIsLiked((prev) => !prev);
+
+  const clickLike = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/stores/${Shop.id}/bookmark/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+      if (res.status === 200 || res.status === 201) {
+        setIsLiked((prev) => !prev);
+      }
+    } catch (err) {
+      console.error("즐겨찾기 토글 실패:", err);
+      alert("즐겨찾기 작업 중 에러 발생.");
+    }
   };
 
   const navigate = useNavigate();
-  const { shopId } = useParams();
   const goBack = () => {
     navigate(`/SearchMain`);
   };
-  const Shop = shopId
-    ? dataList.find((item) => item.shopId === parseInt(shopId))
-    : null;
+
+  //방문기록
+  const [visitData, setVisitData] = useState(null);
+  const [noVisitData, setNoVisitData] = useState(false);
+
+  useEffect(() => {
+    const fetchVisitData = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/stores/${Shop.id}/visit/latest/`,
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          setVisitData(res.data);
+        }
+      } catch (err) {
+        if (err.response?.status === 204) {
+          setNoVisitData(true); // 방문 기록 없음
+        } else {
+          console.error("방문 기록 조회 실패:", err);
+        }
+      }
+    };
+
+    if (Shop?.id) {
+      setIsLiked(Shop.is_bookmarked);
+      fetchVisitData(); // ← 여기에서 호출
+    }
+  }, [Shop]);
+
+
   return (
     <CS.Container>
       <CS.Box>
@@ -50,8 +109,8 @@ const ClickedSearch = ({ dataList }) => {
           </CS.LikeBtn>
         </CS.TopBox>
 
-        <CS.ShopImg>가게 이미지</CS.ShopImg>
-        <CS.ShopName>{Shop.title}</CS.ShopName>
+        <CS.ShopImg src={`http://localhost:8000/store_photo/${Shop.name}.png`} />
+        <CS.ShopName>{Shop.name}</CS.ShopName>
 
         <CS.InformWrapper className="review">
           <CS.InformImg>
@@ -61,7 +120,7 @@ const ClickedSearch = ({ dataList }) => {
               width="25px"
             />
           </CS.InformImg>
-          <CS.InformText> {Shop.review}</CS.InformText>
+          <CS.InformText> {Shop.rating}/5.0</CS.InformText>
         </CS.InformWrapper>
 
         <CS.InformWrapper className="distance">
@@ -72,24 +131,24 @@ const ClickedSearch = ({ dataList }) => {
               width="25px"
             />
           </CS.InformImg>
-          <CS.InformText> {Shop.distance}</CS.InformText>
+          <CS.InformText> {Shop.latitude}m</CS.InformText>
         </CS.InformWrapper>
 
         <CS.InformWrapper className="minute">
-          <CS.InformText className="minute"> {Shop.minute}</CS.InformText>
+          <CS.InformText className="minute"> 도보{Shop.longitude}분</CS.InformText>
         </CS.InformWrapper>
 
         <CS.TitleText className="congestion">현재 혼잡도</CS.TitleText>
         <CS.CongestionBar className={BarColor(Shop.congestion)}>
 
           <CS.CongestionImg>
-            {Shop.congestion === "여유" ? (
+            {Shop.congestion === "low" ? (
               <img
                 src={`${process.env.PUBLIC_URL}/images/Green.svg`}
                 alt="CongestionImg"
                 width="42px"
               />
-            ) : Shop.congestion === "보통" ? (
+            ) : Shop.congestion === "medium" ? (
               <img
                 src={`${process.env.PUBLIC_URL}/images/Yellow.svg`}
                 alt="CongestionImg"
@@ -104,8 +163,17 @@ const ClickedSearch = ({ dataList }) => {
             )}
           </CS.CongestionImg>
           <CS.CongestionInform>혼잡도</CS.CongestionInform>
-          <CS.Congestion className={BarColor(Shop.congestion)}>{Shop.congestion}</CS.Congestion>
+          <CS.Congestion className={BarColor(Shop.congestion)}>
+            {Shop.congestion === "low" ? (
+              <div>여유</div>
+            ) : Shop.congestion === "medium" ? (
+              <div>보통</div>
+            ) : (
+              <div>혼잡</div>
+            )}
+          </CS.Congestion>
           <CS.Population>{Shop.population}</CS.Population>
+          <CS.custom>{Shop.current_customers} / {Shop.max_customers}명</CS.custom>
         </CS.CongestionBar>
 
         <CS.TitleText className="shopInform">가게 정보</CS.TitleText>
@@ -117,14 +185,14 @@ const ClickedSearch = ({ dataList }) => {
               width="26px"
               style={{ padding: "3px" }}
             />
-            영업중
+            <div>{Shop.open_time}</div>
             <img
               src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
               alt="Dot"
               width="5px"
               style={{ padding: "3px" }}
             />
-            곧 브레이크 타임
+            <div>{Shop.close_time}</div>
             <img
               src={`${process.env.PUBLIC_URL}/images/DownArrow.svg`}
               alt="DownArrow"
@@ -137,7 +205,7 @@ const ClickedSearch = ({ dataList }) => {
         <CS.TitleText className="menu">메뉴</CS.TitleText>
         <CS.TextWrapper className="menu">
           <CS.SubText>네이버 지도</CS.SubText>
-          <CS.SubText className="link">바로가기</CS.SubText>
+          <CS.SubText className="link" onClick={() => window.open(Shop.naver_url, "_blank")}>바로가기</CS.SubText>
         </CS.TextWrapper>
 
         <CS.TitleText className="visit">방문 기록</CS.TitleText>
@@ -148,22 +216,35 @@ const ClickedSearch = ({ dataList }) => {
             width="22px"
             style={{ padding: "11px" }}
           />
-          <CS.VisitText>4명 방문</CS.VisitText>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
-            alt="Dot"
-            width="5px"
-            style={{ padding: "10px" }}
-          />
-          <CS.VisitText>바로입장</CS.VisitText>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
-            alt="Dot"
-            width="5px"
-            style={{ padding: "10px" }}
-          />
-          <CS.VisitText>혼잡도 보통</CS.VisitText>
-          <CS.VisitTime>10분전</CS.VisitTime>
+          {visitData ? (
+            <>
+              <CS.VisitText>{visitData.visit_count}명 방문</CS.VisitText>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
+                alt="Dot"
+                width="5px"
+                style={{ padding: "10px" }}
+              />
+              <CS.VisitText>{visitData.wait_time}</CS.VisitText>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Dot.svg`}
+                alt="Dot"
+                width="5px"
+                style={{ padding: "10px" }}
+              />
+              <CS.VisitText>혼잡도 {visitData.congestion}</CS.VisitText>
+              <CS.VisitTime>
+                {new Date(visitData.created_at).toLocaleTimeString("ko-KR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </CS.VisitTime>
+            </>
+          ) : noVisitData ? (
+            <CS.VisitText>아직 방문 기록이 없습니다.</CS.VisitText>
+          ) : (
+            <CS.VisitText>방문 기록 불러오는 중...</CS.VisitText>
+          )}
         </CS.VisitWrapper>
 
         <NavigationBar />
