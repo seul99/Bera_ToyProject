@@ -267,7 +267,7 @@ export const Minute = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-left: 3px;
+  margin-left: 8px;
 `;
 
 export const BottomBar = styled.div`

@@ -29,7 +29,8 @@ const SearchMain = () => {
         return "-rating";
       case "여유로운 순":
         return "population_ratio";
-      //가까운 순 api 없음
+      case "가까운 순":
+        return "distance";
       default:
         return ""; //기본 순
     }
@@ -92,7 +93,15 @@ const SearchMain = () => {
         const res = await axios.get(url, {
           headers: { Authorization: `Token ${token}` },
         });
-        setDataList(res.data);
+        //가까운순
+        let fetchedData = res.data;
+
+        const ordering = getOrdering();
+        if (ordering === "distance") {
+          fetchedData = [...fetchedData].sort((a, b) => a.latitude - b.latitude); // 가까운순
+        }
+
+        setDataList(fetchedData);
       } catch (err) {
         console.error("가게 데이터 불러오기 실패:", err);
         setError("데이터를 불러오지 못했습니다.");
@@ -227,7 +236,6 @@ const SearchMain = () => {
 
         {isModalOpen && (
           <>
-            {/* 블러 배경 레이어 */}
             <S.ModalOverlay onClick={toggleModal} />
 
             <S.ModalBox>
@@ -281,7 +289,7 @@ const SearchMain = () => {
                       alt="Distance"
                       width="18px"
                     />
-                    {e.distance} <S.Minute>{e.minute}</S.Minute>
+                    {e.latitude}m <S.Minute>도보{e.longitude}분</S.Minute>
                   </S.DistanceText>
                 </div>
               </S.LeftBox>
