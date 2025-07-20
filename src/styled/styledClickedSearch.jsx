@@ -180,7 +180,6 @@ export const CongestionBar = styled.div`
   border-radius: 15px;
   display: flex;
   align-items: center; // 세로 중앙
-
   &.green{
     background: #e8fcd9;
   }
@@ -287,6 +286,16 @@ export const BottomBar = styled.div`
   flex-shrink: 0;
   border: 1px solid #f4f5f7;
   background: #fff;
+`;
+
+export const custom = styled.div`
+  margin-left:120px;
+  color: #000;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
 `;
 export const BottomImg = styled.div`
   position: absolute;

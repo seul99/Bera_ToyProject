@@ -226,20 +226,17 @@ const SearchMain = () => {
         </S.BasicLayer>
 
         {isModalOpen && (
-          <S.ModalBox>
-            <S.ModalItem onClick={() => handleSelect("기본 순")}>
-              기본 순
-            </S.ModalItem>
-            <S.ModalItem onClick={() => handleSelect("가까운 순")}>
-              가까운 순
-            </S.ModalItem>
-            <S.ModalItem onClick={() => handleSelect("여유로운 순")}>
-              여유로운 순
-            </S.ModalItem>
-            <S.ModalItem onClick={() => handleSelect("별점 높은 순")}>
-              별점 높은 순
-            </S.ModalItem>
-          </S.ModalBox>
+          <>
+            {/* 블러 배경 레이어 */}
+            <S.ModalOverlay onClick={toggleModal} />
+
+            <S.ModalBox>
+              <S.ModalItem onClick={() => handleSelect("기본 순")}>기본 순</S.ModalItem>
+              <S.ModalItem onClick={() => handleSelect("가까운 순")}>가까운 순</S.ModalItem>
+              <S.ModalItem onClick={() => handleSelect("여유로운 순")}>여유로운 순</S.ModalItem>
+              <S.ModalItem onClick={() => handleSelect("별점 높은 순")}>별점 높은 순</S.ModalItem>
+            </S.ModalBox>
+          </>
         )}
 
         {/* 버튼 누르면 색 변경 */}

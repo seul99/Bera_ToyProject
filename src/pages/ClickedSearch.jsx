@@ -132,6 +132,7 @@ const ClickedSearch = () => {
               />
             )}
           </CS.CongestionImg>
+          <CS.CongestionInform>혼잡도</CS.CongestionInform>
           <CS.Congestion className={BarColor(Shop.congestion)}>
             {Shop.congestion === "low" ? (
               <div>여유</div>
@@ -142,6 +143,7 @@ const ClickedSearch = () => {
             )}
           </CS.Congestion>
           <CS.Population>{Shop.population}</CS.Population>
+          <CS.custom>{Shop.current_customers} / {Shop.max_customers}명</CS.custom>
         </CS.CongestionBar>
 
         <CS.TitleText className="shopInform">가게 정보</CS.TitleText>
