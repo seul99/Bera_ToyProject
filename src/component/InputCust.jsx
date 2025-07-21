@@ -44,7 +44,9 @@ function InputCust({ onClose, setInputData }) {
         }
       );
 
-      const matchedStore = res.data?.[0];
+      // 정확히 이름 일치하는 가게 찾기
+      const matchedStore = res.data.find(store => store.name === storeName);
+
       if (!matchedStore) {
         alert("일치하는 가게가 없습니다.");
         return;

@@ -16,14 +16,16 @@ function InputManager({ onClose, setInputData, storeId }) {
     }
 
     try {
-      // 1. 가게 이름으로 ID 조회
-      const res = await axios.get(`http://localhost:8000/stores/?name=${encodeURIComponent(name)}`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `http://localhost:8000/stores/?name=${encodeURIComponent(name)}`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
 
-      const matchedStore = res.data?.[0];
+      const matchedStore = res.data.find(store => store.name === name); // ← 정확히 일치하는 가게만!
       if (!matchedStore) {
         alert("일치하는 가게가 없습니다.");
         return;
@@ -31,7 +33,6 @@ function InputManager({ onClose, setInputData, storeId }) {
 
       const storeId = matchedStore.id;
 
-      // 2. 혼잡도 POST 요청
       await axios.post(
         `http://localhost:8000/stores/${storeId}/update_congestion/`,
         {
