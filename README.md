@@ -1,83 +1,82 @@
-# 멋사 토이 프로젝트
-베라팀 자리있솜
+# 🍦 멋사 토이 프로젝트 – 베라팀 자리있솜
 
-# 슬기
-- 즐겨찾기, 모달창, css 디테일, 네비게이션바, css 통합
-### api 연결 현황
+<br>
 
-**SearchMain** <br>
-⦁	음식점  전체조회 <br>
-⦁	카페/디저트 전체 조회 <br>
-⦁	음식점 카테고리별 조회 (한식, 양식, 중식, 일식) <br>
-⦁	즐겨찾기한 가게만 필터링 <br>
-⦁	가게 기본순 정렬 <br>
-⦁	가게 별점 높은 순 정렬 <br>
-⦁	가게 여유로운 순 정렬 <br>
+## 👩‍💻 팀원 역할
+- **슬기**  
+  ⦁ 즐겨찾기  
+  ⦁ 모달창  
+  ⦁ 네비게이션바  
+  ⦁ CSS 디테일 및 통합  
+  ⦁ API 연결 (검색 / 정렬 / 카테고리)
 
- <br>
-main 에서 버튼마다 음식점, 카페 데이터를 전송하게만듬 <br>
-SearchMain 에서 userLocation 선언 <br>
- <br>
- 
-카페조회 api 명세서에 있는 주소 수정함 <br>
-SearchMain 에 한식,중식 이런거 싹다 api 명세서에 적혀있는대로 수정완료 <br>
-```
-<S.IconBox
-onClick={() => setSubCategory("korean")}
-className={subCategory === "korean" ? "active" : ""}
->
-```
-이런식으로 수정함 <br>
+<br>
 
-정렬 코드 값 가져와 백엔드 값으로 변경 후 api 연결 <br>
-```
-  const getOrderingParam = () => {
-    switch (sortText) {
-      case "별점 높은 순":
-        return "-rating";
-      case "여유로운 순":
-        return "population_ratio";
-      //가까운 순 api 없음
-      default:
-        return ""; //기본 순
-    }
-  };
-```
-useEffect() 안에 선언 <br>
-```
-// 정렬
-const ordering = getOrdering();
-if (ordering) {
-url += `&ordering=${ordering}`;
-}
-```
- <br>
+## 📌 주요 기능
+- 음식점 / 카페 전체 조회  
+- 음식점 카테고리별 조회 (한식 / 양식 / 중식 / 일식)  
+- 즐겨찾기 필터링  
+- 정렬 기능  
+  - 기본  
+  - 별점 높은 순  
+  - 여유로운 순  
+- 회원가입  
+  - ID, 비밀번호, 이름, 전화번호 단계별 입력 → Main 이동  
+- 로그인 및 소셜 로그인  
 
-**id-Password-Name-PhoneNumber** 완료버튼 누르면 main 으로 이동 <br>
-⦁	회원가입 <br>
-⦁	중복확인 <br>
-```
-navigate(`/Password`, { state: { id } });
-```
-이런식으로 페이지 이동시 입력값 같이 넘겨주기 <br>
- <br>
-pw 페이지부터 <br>
-```
-  const location = useLocation();
-  const id = location.state?.id;
-  const goName = () => {
-    if (pw.length >= 8 && pw === conPw) {
-      navigate(`/Name`, { state: { id, password } });
-    }
-  };
-```
-값으로 PhoneNumber 까지 인자 전달 후 main 에서 완료 <br>
- <br>
-**Login** <br>
-⦁	로그인 <br>
-⦁	소셜로그인  <br>
-api 연결 완료
+
+<br>
+
+## 📷 발표 자료
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/73d4b6bf-7534-42ea-be5a-02f82af3c6cc" width="600"/><br/>
+  <em>표지</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/59040339-c02e-42f2-96ae-78fcc57d21bc" width="600"/><br/>
+  <em>기획 의도</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cbd0e843-332d-49e3-8c83-7e659688bac8" width="600"/><br/>
+  <em>개요 & 타깃 유저</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cbd17f4c-8e8e-4b90-b840-d80e19ec1910" width="600"/><br/>
+  <em>주요 기능 & 목표</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/fe81990c-b98d-4a78-95f4-c4c164a0bfd0" width="600"/><br/>
+  <em>프로토타입 – 회원가입/로그인 1</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/086a793d-5708-49cf-9def-d660569a80e9" width="600"/><br/>
+  <em>프로토타입 – 회원가입/로그인 2</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/816287c0-ec80-44ab-a902-a989fb85bf7e" width="600"/><br/>
+  <em>프로토타입 – 홈 화면</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bababa2a-82b8-4ef1-bebe-c471a885e30e" width="600"/><br/>
+  <em>프로토타입 – 가게 탐색</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1343011a-1aa5-4785-a7b5-90b8e70058e6" width="600"/><br/>
+  <em>팀원 소개</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bd542df1-b9b6-405d-be83-26762d3a0f8b" width="600"/><br/>
+  <em>마무리</em>
+</p>
 
 ---
-
-
